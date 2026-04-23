@@ -1,25 +1,28 @@
 <?php
 
+/**
+ * Seeder principal.
+ *
+ * Simplemente llama al resto de seeders en el orden correcto
+ * (paises y provincias primero, porque clientes/tareas dependen de ellos).
+ *
+ * @author  JDAS DWES
+ * @version 1.0
+ */
+
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            ProvinciasSeeder::class,
+            PaisesSeeder::class,
+            EmpleadosSeeder::class,
+            ClientesSeeder::class,
         ]);
     }
 }
