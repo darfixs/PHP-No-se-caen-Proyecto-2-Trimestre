@@ -6,7 +6,7 @@
  * Permite crear empleados falsos en los tests:
  *   Empleado::factory()->create();
  *
- * @author  Alumno DWES
+ * @author  JDAS DWES
  * @version 1.0
  */
 
