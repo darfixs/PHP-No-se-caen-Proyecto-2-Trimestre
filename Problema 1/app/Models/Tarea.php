@@ -7,7 +7,7 @@
  * aquí vive TODA la lógica de consulta (listar, filtrar, completar, etc.)
  * para no dejarla en los controladores.
  *
- * @author  Alumno DWES
+ * @author  JDAS DWES
  * @version 1.0
  */
 
@@ -39,10 +39,7 @@ class Tarea extends Model
         'fechaCreacion'    => 'datetime',
     ];
 
-    /* =======================================================================
-     *  RELACIONES
-     * ======================================================================= */
-
+    /*  RELACIONES
     /** Cada tarea pertenece a un cliente. */
     public function cliente(): BelongsTo
     {
@@ -62,13 +59,6 @@ class Tarea extends Model
     }
 
     /*  CONSULTAS  */
-
-    /**
-     * Listado paginado para el administrador: ve todas las tareas.
-     *
-     * @param  int $porPagina
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
     public static function listadoParaAdmin(int $porPagina = 10)
     {
         return self::with(['cliente', 'operario'])
@@ -76,14 +66,6 @@ class Tarea extends Model
                    ->paginate($porPagina);
     }
 
-    /**
-     * Listado paginado para un operario: SOLO ve las tareas que tiene asignadas.
-     * (Requisito del PDF: "Un operario solo verá las tareas que tiene asignadas").
-     *
-     * @param  int $operarioId
-     * @param  int $porPagina
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
     public static function listadoParaOperario(int $operarioId, int $porPagina = 10)
     {
         return self::with(['cliente'])
@@ -92,14 +74,6 @@ class Tarea extends Model
                    ->paginate($porPagina);
     }
 
-    /**
-     * Cambia el estado de la tarea a "Realizada" y guarda las anotaciones
-     * posteriores y el fichero resumen (si el operario subió uno).
-     *
-     * @param  array       $datos  anotaciones y estado
-     * @param  string|null $rutaFichero ruta relativa donde se guardó el fichero
-     * @param  string|null $nombreOriginal nombre original del fichero
-     */
     public function completar(array $datos,
                               ?string $rutaFichero = null,
                               ?string $nombreOriginal = null): void
