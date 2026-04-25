@@ -3,7 +3,7 @@
 /**
  * Validación del alta/edición de un cliente.
  *
- * @author  JDAS DWES
+ * @author  Alumno DWES
  * @version 1.0
  */
 
